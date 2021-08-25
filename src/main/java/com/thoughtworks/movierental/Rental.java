@@ -37,4 +37,14 @@ public class Rental {
         }
         return thisAmount;
     }
+
+    int frequentRenterPoint() {
+        if (isBonusApplicable())
+            return 2;
+        return 1;
+    }
+
+    private boolean isBonusApplicable() {
+        return movie.isNewRelease() && daysRented > 1;
+    }
 }
