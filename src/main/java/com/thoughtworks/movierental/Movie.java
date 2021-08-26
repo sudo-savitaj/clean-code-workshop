@@ -7,10 +7,32 @@ public class Movie {
 
     private String title;
     private int priceCode;
+    private MovieType movieType;
 
+    @Deprecated
     public Movie(String title, int priceCode) {
         this.title = title;
         this.priceCode = priceCode;
+        this.movieType = getMovieTypeFor(priceCode);
+    }
+
+    private MovieType getMovieTypeFor(int priceCode) {
+        switch (priceCode) {
+            case REGULAR:
+                return new RegularMovieType();
+            case NEW_RELEASE:
+                return new NewReleaseMovieType();
+            case CHILDRENS:
+                return new ChildrenMovieType();
+            default:
+                return new NULLMovieType();
+        }
+    }
+
+    public Movie(String title, MovieType movieType) {
+        this.title = title;
+        this.priceCode = movieType.priceCode();
+        this.movieType = movieType;
     }
 
     public int getPriceCode() {
@@ -26,27 +48,42 @@ public class Movie {
     }
 
     boolean isNewRelease() {
-        return getPriceCode() == NEW_RELEASE;
+        return priceCode == NEW_RELEASE;
     }
 
     double amount(int daysRented) {
-        double thisAmount = 0;
-        switch (getPriceCode()) {
+        switch (priceCode) {
             case REGULAR:
-                thisAmount += 2;
-                if (daysRented > 2)
-                    thisAmount += (daysRented - 2) * 1.5;
-                break;
+                return amountForRegularMovie(daysRented);
             case NEW_RELEASE:
-                thisAmount += daysRented * 3;
-                break;
+                return amountForNewReleaseMovie(daysRented);
             case CHILDRENS:
-                thisAmount += 1.5;
-                if (daysRented > 3)
-                    thisAmount += (daysRented - 3) * 1.5;
-                break;
+                return amountForChildren(daysRented);
+            default:
+                return amountForUnknownMovie();
         }
+    }
+
+    private double amountForUnknownMovie() {
+        return 0d;
+    }
+
+    private double amountForChildren(int daysRented) {
+        double thisAmount = 1.5;
+        if (daysRented > 3)
+            thisAmount += (daysRented - 3) * 1.5;
         return thisAmount;
+    }
+
+    private double amountForNewReleaseMovie(int daysRented) {
+        return daysRented * 3;
+    }
+
+    private double amountForRegularMovie(int daysRented) {
+        double amount = 2;
+        if (daysRented > 2)
+            amount += (daysRented - 2) * 1.5;
+        return amount;
     }
 
     boolean isBonusApplicable(int daysRented) {

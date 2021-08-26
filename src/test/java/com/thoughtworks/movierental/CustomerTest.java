@@ -8,9 +8,9 @@ public class CustomerTest {
     @Test
     public void shouldGenerateStatement() {
         Customer customer = new Customer("ABC");
-        customer.addRental(new Rental(new Movie("Movie-1", Movie.REGULAR), 4));
-        customer.addRental(new Rental(new Movie("Movie-2", Movie.CHILDRENS), 5));
-        customer.addRental(new Rental(new Movie("Movie-2", Movie.NEW_RELEASE), 3));
+        customer.addRental(new Rental(new Movie("Movie-1", new RegularMovieType()), 4));
+        customer.addRental(new Rental(new Movie("Movie-2", new ChildrenMovieType()), 5));
+        customer.addRental(new Rental(new Movie("Movie-2", new NewReleaseMovieType()), 3));
 
         assertEquals("Rental Record for ABC\n" +
                 "\tMovie-1\t5.0\n" +
@@ -23,9 +23,9 @@ public class CustomerTest {
     @Test
     public void shouldGenerateHTMLStatement() {
         Customer customer = new Customer("ABC");
-        customer.addRental(new Rental(new Movie("Movie-1", Movie.REGULAR), 4));
-        customer.addRental(new Rental(new Movie("Movie-2", Movie.CHILDRENS), 5));
-        customer.addRental(new Rental(new Movie("Movie-2", Movie.NEW_RELEASE), 3));
+        customer.addRental(new Rental(new Movie("Movie-1", new RegularMovieType()), 4));
+        customer.addRental(new Rental(new Movie("Movie-2", new ChildrenMovieType()), 5));
+        customer.addRental(new Rental(new Movie("Movie-2", new NewReleaseMovieType()), 3));
 
         assertEquals("<h3>Rental Record for ABC<h3><p>Movie-1<b>5.0</b><br/>Movie-2<b>4.5</b><br/>Movie-2<b>9.0</b><br/></p>" +
                 "<p>Total amount 18.5 You earned <b> 4</b> frequent renter points</p>", customer.htmlStatement());
