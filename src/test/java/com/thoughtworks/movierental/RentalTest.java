@@ -29,4 +29,10 @@ public class RentalTest {
         Rental rental = new Rental(new Movie("movie-1", new NULLMovieType()), 10);
         assertEquals(0d, rental.amount(), 0d);
     }
+
+    @Test
+    public void shouldCalculateAmountForBlueRayMovie() {
+        Rental rental = new Rental(new Movie("movie-1", new BlueRayMovieType()), 10);
+        assertEquals(40d, rental.amount(), 0d);
+    }
 }

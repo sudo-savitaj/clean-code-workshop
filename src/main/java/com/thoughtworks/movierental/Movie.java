@@ -4,6 +4,7 @@ public class Movie {
     public static final int CHILDRENS = 2;
     public static final int REGULAR = 0;
     public static final int NEW_RELEASE = 1;
+    public static final int BLUE_RAY = 3;
 
     private String title;
     private int priceCode;
@@ -47,52 +48,21 @@ public class Movie {
         return title;
     }
 
-    boolean isNewRelease() {
-        return priceCode == NEW_RELEASE;
+    public double amount(int daysRented) {
+        return movieType.amountFor(daysRented);
     }
 
-    double amount(int daysRented) {
-        switch (priceCode) {
-            case REGULAR:
-                return amountForRegularMovie(daysRented);
-            case NEW_RELEASE:
-                return amountForNewReleaseMovie(daysRented);
-            case CHILDRENS:
-                return amountForChildren(daysRented);
-            default:
-                return amountForUnknownMovie();
-        }
-    }
-
-    private double amountForUnknownMovie() {
-        return 0d;
-    }
-
-    private double amountForChildren(int daysRented) {
-        double thisAmount = 1.5;
-        if (daysRented > 3)
-            thisAmount += (daysRented - 3) * 1.5;
-        return thisAmount;
-    }
-
-    private double amountForNewReleaseMovie(int daysRented) {
-        return daysRented * 3;
-    }
-
-    private double amountForRegularMovie(int daysRented) {
-        double amount = 2;
-        if (daysRented > 2)
-            amount += (daysRented - 2) * 1.5;
-        return amount;
-    }
-
-    boolean isBonusApplicable(int daysRented) {
-        return isNewRelease() && daysRented > 1;
-    }
-
-    int frequentRenterPoint(int daysRented) {
+    public int frequentRenterPoint(int daysRented) {
         if (isBonusApplicable(daysRented))
             return 2;
         return 1;
+    }
+
+    private boolean isBonusApplicable(int daysRented) {
+        return isNewRelease() && daysRented > 1;
+    }
+
+    private boolean isNewRelease() {
+        return priceCode == NEW_RELEASE;
     }
 }

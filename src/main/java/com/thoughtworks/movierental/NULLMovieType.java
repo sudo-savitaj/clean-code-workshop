@@ -5,4 +5,9 @@ public class NULLMovieType extends MovieType {
     public int priceCode() {
         return -1;
     }
+
+    @Override
+    public double amountFor(int daysRented) {
+        return 0;
+    }
 }
