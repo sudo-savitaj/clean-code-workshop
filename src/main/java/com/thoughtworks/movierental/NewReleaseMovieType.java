@@ -10,4 +10,12 @@ public class NewReleaseMovieType extends MovieType {
     public double amountFor(int daysRented) {
         return daysRented * 3;
     }
+
+    @Override
+    public int frequentRenterPointFor(int daysRented) {
+        if (daysRented > 1){
+            return 2;
+        }
+        return 1;
+    }
 }

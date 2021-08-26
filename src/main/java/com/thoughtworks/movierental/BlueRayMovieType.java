@@ -10,4 +10,9 @@ public class BlueRayMovieType extends MovieType {
     public double amountFor(int daysRented) {
         return daysRented * 4;
     }
+
+    @Override
+    public int frequentRenterPointFor(int daysRented) {
+        return 3;
+    }
 }

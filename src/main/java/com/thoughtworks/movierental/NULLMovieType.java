@@ -10,4 +10,9 @@ public class NULLMovieType extends MovieType {
     public double amountFor(int daysRented) {
         return 0;
     }
+
+    @Override
+    public int frequentRenterPointFor(int daysRented) {
+        return 1;
+    }
 }

@@ -53,9 +53,7 @@ public class Movie {
     }
 
     public int frequentRenterPoint(int daysRented) {
-        if (isBonusApplicable(daysRented))
-            return 2;
-        return 1;
+        return movieType.frequentRenterPointFor(daysRented);
     }
 
     private boolean isBonusApplicable(int daysRented) {
