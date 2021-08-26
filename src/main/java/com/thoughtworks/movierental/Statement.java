@@ -9,11 +9,11 @@ class Statement {
     private final double totalAmount;
     private final int totalFrequentRenterPoint;
 
-    public Statement(String name, List<Rental> rentals, double totalAmount, int totalFrequentRenterPoint) {
+    public Statement(String name, Rentals rentals) {
         this.name = name;
         this.rentals = rentals;
-        this.totalAmount = totalAmount;
-        this.totalFrequentRenterPoint = totalFrequentRenterPoint;
+        this.totalAmount = rentals.totalAmount();
+        this.totalFrequentRenterPoint = rentals.totalFrequentRenterPoint();
     }
 
     public String generate() {
