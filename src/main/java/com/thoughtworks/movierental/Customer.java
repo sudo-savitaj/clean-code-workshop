@@ -59,5 +59,26 @@ public class Customer {
         return totalAmount;
     }
 
+    public String htmlStatement() {
+        return htmlHeader() + htmlBody() + htmlFooter();
+    }
+
+    private String htmlHeader() {
+        return "<h3>Rental Record for " + name + "<h3>";
+    }
+
+    private String htmlBody() {
+        String result = "<p>";
+        for (Rental each : rentals) {
+            result += each.getMovie().getTitle() + "<b>" +
+                    each.amount() + "</b><br/>";
+        }
+        result += "</p>";
+        return result;
+    }
+
+    private String htmlFooter() {
+        return "<p>Amount owed is <b> " + totalAmount() +" </b></p><p>You earned <b> " + totalFrequentRenterPoint() + "</b> frequent renter points</p>";
+    }
 }
 
