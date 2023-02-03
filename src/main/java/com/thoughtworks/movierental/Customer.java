@@ -24,8 +24,8 @@ public class Customer {
     }
 
     private String footer() {
-        String footer = "Amount owed is " + getTotalAmount() + "\n";
-        footer += "You earned " + getTotalFrequentRenterPoints()
+        String footer = "Amount owed is " + totalAmount() + "\n";
+        footer += "You earned " + totalFrequentRenterPoint()
                 + " frequent renter points";
         return footer;
     }
@@ -43,7 +43,7 @@ public class Customer {
         return  "Rental Record for " + getName() + "\n";
     }
 
-    private int getTotalFrequentRenterPoints() {
+    private int totalFrequentRenterPoint() {
         int frequentRenterPoints = 0;
         for (Rental rental : rentals) {
             frequentRenterPoints += rental.frequentRenterPoint();
@@ -51,7 +51,7 @@ public class Customer {
         return frequentRenterPoints;
     }
 
-    private double getTotalAmount() {
+    private double totalAmount() {
         double totalAmount = 0;
         for (Rental rental : rentals) {
             totalAmount += rental.amount();;
